@@ -1,7 +1,8 @@
 ﻿#include <iostream>
 #include <string>
 #include <vector>
-
+#include <sstream>
+#include <math.h>
 #include <gtest\gtest.h>
 
 using namespace std;
@@ -19,7 +20,37 @@ int getAscendingStr(string& inputStr)
 	
 	/// Please fill your code here
 
+	stringstream ss(inputStr);
+	int buffer[100];
+	int j = 0;
+	int check = 0;
 
+	//字串非數字
+	string::iterator it = inputStr.begin();
+	while (it != inputStr.end()) {
+		if (isalpha(*it))
+			return -1;
+		++it;
+	}
+	//string to int	
+	while (ss >> buffer[j]) {
+		j++;
+	}
+	//排序
+	for (int i = 0; i < j - 1; i++) {
+		if (buffer[i] > buffer[i + 1]) {
+			int temp = buffer[i];
+			buffer[i] = buffer[i + 1];
+			buffer[i + 1] = temp;
+		}
+	}
+
+	inputStr = "";
+	for (int i = 0; i < j; i++) {
+		inputStr += to_string(buffer[i]);
+		if (i != j - 1)
+			inputStr += " ";
+	}
 	return 0;
 }
 
@@ -36,8 +67,20 @@ int getAscendingStr(string& inputStr)
 //          (return vector size should be 0)
 int solveQ(vector<double> &x, double a, double b, double c)
 {
+	double check = b*b - 4 * a*c;
+	if (check < 0)
+		return -1;
 
-	return 0;
+	else if (check == 0) {
+		x.push_back(-b / 2 * a);
+		return 0;
+	}
+	else {
+		x.push_back((-b + sqrt(check)) / 2 * a);
+		x.push_back((-b - sqrt(check)) / 2 * a);
+		return 1;
+	}
+	
 }
 
 int main(int argc, char*argv[]) {
