@@ -37,13 +37,7 @@ int getAscendingStr(string& inputStr)
 		j++;
 	}
 	//排序
-	for (int i = 0; i < j - 1; i++) {
-		if (buffer[i] > buffer[i + 1]) {
-			int temp = buffer[i];
-			buffer[i] = buffer[i + 1];
-			buffer[i + 1] = temp;
-		}
-	}
+	sort(buffer, buffer + j);
 
 	inputStr = "";
 	for (int i = 0; i < j; i++) {
