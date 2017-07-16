@@ -21,7 +21,8 @@ int getAscendingStr(string& inputStr)
 	/// Please fill your code here
 
 	stringstream ss(inputStr);
-	int buffer[100];
+	int *buffer;
+	buffer = new int[inputStr.length()];
 	int j = 0;
 	int check = 0;
 
